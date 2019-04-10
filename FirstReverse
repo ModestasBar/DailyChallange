@@ -20,7 +20,7 @@ if(str.length != 0){
 }
 
 function reversLetters(string) {
-    //Make string => make and array of characters => reverse elements => make a string of elements
+    //Make string => make an array of characters => reverse elements => make a string of elements
     return string.toString().split('').reverse().join('');
 }
 
