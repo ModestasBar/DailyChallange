@@ -1,0 +1,39 @@
+function LetterChanges(str) { 
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
+const arrayAlphabet  = alphabet.split('');
+
+if(str.length > 0) {
+    return replaceLetter(arrayAlphabet, str);
+    
+}
+  // code goes here  
+  return str; 
+         
+}
+
+const replaceLetter = (arrayAlphabet, string) => {
+    let arrStr = string.split('');
+    let newStr ='';
+    for(let i = 0; i <= arrStr.length-1; i++) {
+        //Check if alphabet includes the letter and if so, returning the letter one step higher position
+        //a,b,c => b is higher than a.
+        if(arrayAlphabet.includes(arrStr[i].toLowerCase())) {
+            newStr += isVowel(arrayAlphabet[arrayAlphabet.indexOf(arrStr[i])+1])
+            //console.log('+')
+        } else {
+            //console.log('-')
+            newStr += isVowel(arrStr[i]);
+        }
+    }
+    return newStr;
+}
+//Check if vowel
+const isVowel = letter => {
+    if(letter === "a" || letter === "e" || letter === "i" || letter === "o" || letter === "u") {
+        return letter.toUpperCase();
+    }
+    return letter;
+}
+   
+// keep this function call here 
+LetterChanges(readline());
