@@ -1,55 +1,84 @@
 function VowelSquare(strArr) { 
 
-//Input check
-if(strArr.length > 1) {
-    
-  //Check for the non letters symbols    
-  if(irritation2DArr(strArr)) {
-      //All letters
-      
-  } else {
-      
-      
-  }
+   return vowelSquareSearch(vowelFinder(strArr));
+
 }
 
-  // code goes here  
-  return strArr; 
-        
-}
-
-//2D array irritation
-const irritation2DArr = array => {
-    let nonLettersIndex = [];
-    let allVowelIndex =[];
-    for(let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array[i].length; j++) {
-            
-            
-            //Save the position of non-letter character
-            if(!testFunc(array[i][j])) {
-                symbol.push([i,j]);
-            }
-            
-            //Save the position of all vowels characters
-            if(vowelsPossition(array[i][j])) {
-                allVowelIndex.push([i,j]);
+//Function to return all the vovles "couples" position indexes and store it to array;
+function vowelFinder(strArr) {
+    let vovelIndexArr = [];
+    //Array element (row)
+    strArr.forEach(val => {
+        let vovelIndexString = '';
+        //Element characters (col)
+        for(let i = 0; i < val.length-1; i++) {
+            //Check if char is equal to a vowel and if next char his "couple" is also a vowel
+            if(val[i].toLowerCase() === 'a' || val[i].toLowerCase() === 'e' || val[i].toLowerCase() === 'i' || val[i].toLowerCase() === 'o' || val[i].toLowerCase() === 'u') 
+            {
+               if(val[i+1].toLowerCase() === 'a' || val[i+1].toLowerCase() === 'e' || val[i+1].toLowerCase() === 'i' || val[i+1].toLowerCase() === 'o' || val[i+1].toLowerCase() === 'u')
+               {
+                //Constructing vovels "couples" string
+               vovelIndexString += (i.toString() + (i+1).toString())
+               }
             }
         }
-    
-    }
-    console.log(allVowelIndex); 
-    
-    return nonLettersIndex.length > 0 ?  nonLettersIndex : true;
+        //Storing vovels string into an array
+        vovelIndexArr.push(vovelIndexString);
+    })
+   return vovelIndexArr;
 }
 
-//Test function for all arrays
-const testFunc = char => char.match(/[a-zA-Z]/);
+//Function compare vovels index value
+function vowelSquareSearch(indexArr) {
+    //Array values (row)
+    for(let i = 0; i < indexArr.length-1; i++) {
+        //Values numbers(collumns)
+        for(let j = 0; j < indexArr[i].length-1; j++) {
+            //Check if values number matching with next values same position number (values like a row's)
+            if(indexArr[i][j] === indexArr[i+1][j] && indexArr[i][j+1] === indexArr[i+1][j+1]) {
+              //Returning first match row and (row) and value (collumn)
+              return(i+"-"+indexArr[i][j]);
+            }
+        }
+    }
+    
+    return "not found";
+}
+   
+// keep this function call here 
+VowelSquare(readline());
 
 
-//Creating 2D array with positions of all vowels in array
-const vowelsPossition = char => 
-char.toLowerCase() === 'a' || char.toLowerCase() === 'e' || char.toLowerCase() === 'i' || char.toLowerCase() === 'o' || char.toLowerCase() === 'u'
+------------------Second solution--------------------
+function VowelSquare(strArr) { 
+
+    for (let row = 0; row < strArr.length-1; row++) {
+        for (let col = 0; col < strArr[0].length-1; col++) {
+            if (isVowels2x2(strArr, row, col)) {
+                // Good!  Return first one because we
+                // searche in a good order
+                return row + '-' + col;
+            }
+        }
+    }
+    return 'not found';
+         
+         
+    function isVowels2x2(strArr, row, col) {
+        // Could do bounds checking here but it is done in main()
+        
+        if (!isVowel(strArr[row][col])) return false;
+        if (!isVowel(strArr[row+1][col])) return false;
+        if (!isVowel(strArr[row][col+1])) return false;
+        if (!isVowel(strArr[row+1][col+1])) return false;
+        return true;
+    }
+    
+    function isVowel(letter) {
+        const VOWELS = 'aeiou';
+        return VOWELS.includes(letter);
+    }
+}
    
 // keep this function call here 
 VowelSquare(readline());
