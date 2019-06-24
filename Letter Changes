@@ -1,39 +1,32 @@
-function letterChanges(str) { 
-const alphabet = "abcdefghijklmnopqrstuvwxyz";
-const arrayAlphabet  = alphabet.split('');
+// This challenge requires you to change every letter in the string to the -
+// letter following it in the alphabet, so a becomes b, z becomes a, etc.
+// Once every letter is changed, we then need to capitalize only the vowels, namely: a, e, i, o, u.
 
-if(str.length > 0) {
-    return replaceLetter(arrayAlphabet, str);
-    
-}
-  // code goes here  
-  return str; 
-         
+//input String
+//Output String
+
+//Check if input is string
+//If the letter is z or Z then swap the letter to an a.
+//Make vowels capital
+
+function moveLetters (string) {
+     if(typeof string === 'string' && string.length > 0){
+        const swapLetters = string.replace(/[a-z]/gi, value => {
+            return(value === 'z' || value === 'Z')? 'a' : String.fromCharCode(value.charCodeAt()+1);
+        }) 
+     const vowelCap =swapLetters.replace(/a|e|i|o|u|e/gi, toCapital => {
+        return toCapital.toUpperCase();
+     })
+
+     console.log(vowelCap);
+
+     } else {
+        console.log("Invalid input")
+     }
+     
 }
 
-const replaceLetter = (arrayAlphabet, string) => {
-    let arrStr = string.split('');
-    let newStr ='';
-    for(let i = 0; i <= arrStr.length-1; i++) {
-        //Check if alphabet includes the letter and if so, returning the letter one step higher position
-        //a,b,c => b is higher than a.
-        if(arrayAlphabet.includes(arrStr[i].toLowerCase())) {
-            newStr += isVowel(arrayAlphabet[arrayAlphabet.indexOf(arrStr[i])+1])
-            //console.log('+')
-        } else {
-            //console.log('-')
-            newStr += isVowel(arrStr[i]);
-        }
-    }
-    return newStr;
-}
-//Check if vowel
-const isVowel = letter => {
-    if(letter === "a" || letter === "e" || letter === "i" || letter === "o" || letter === "u") {
-        return letter.toUpperCase();
-    }
-    return letter;
-}
+moveLetters('zjd');
 
 -------------------------Option two------------------------
 function letterChanges(str) { 
