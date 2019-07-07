@@ -1,0 +1,47 @@
+Challange: Advent of code 2015.
+    Santa is trying to deliver presents in a large apartment building, but he can't find the right floor - the directions he got are a little confusing. 
+    He starts on the ground floor (floor 0) and then follows the instructions one character at a time.
+    
+    An opening parenthesis, (, means he should go up one floor, and a closing parenthesis, ), means he should go down one floor.
+
+    For example:
+
+            (()) and ()() both result in floor 0.
+            ((( and (()(()( both result in floor 3.
+            ))((((( also results in floor 3.
+            ()) and ))( both result in floor -1 (the first basement level).
+            ))) and )())()) both result in floor -3.
+
+
+    To what floor do the instructions take Santa?
+
+ ----SOLUTION----
+
+    input - .txt file 
+    output - integer number of floor
+
+    <Steps>
+    1. Display document in console.
+    2. Save content in variable as string
+    3. Loop throw the length of string and count '(' and ')'
+    4. Subtract numbers and output the answer
+
+*/
+
+
+
+const fileSystem = require('fs');
+
+let upFloor = 0;
+let downFloor = 0;
+
+fileSystem.readFile(__dirname +'/sample.txt', (err, fd)=> {
+    if (err) throw err;
+    const file = (fd.toString());
+    
+    file.split('').forEach((value)=> {
+        value === '(' ? upFloor++ :downFloor++;
+})
+
+    console.log('Floor', upFloor - downFloor);
+});
